@@ -9,7 +9,7 @@ public class ColetarDemandas {
 
 
 	private final String LISTAR_APLICACOES = "ls /usr/GlassfishAppServer/domains/domain1/applications/j2ee-modules";
-	private final String LISTAR_DEMANDAS = "cat /home/A0088869/centralTeste.properties";
+	private final String LISTAR_DEMANDAS = "cat /root/GVPTestes/centralTestes.properties";
 
 	private ArrayList<String> aplicacoes = new ArrayList<>();
 	private String ip;

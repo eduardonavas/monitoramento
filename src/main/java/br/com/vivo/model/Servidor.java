@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
 
 @Entity()
 @Table(schema = "IVR_OWNER", name = "SERVIDOR")
@@ -20,13 +23,14 @@ public class Servidor {
 	@Column(name = "HOST_NAME")
 	private String hostName;
 	private String ip;
+	private int porta;
+	@Column(name = "TIMEOUT")
+	private int timeOut;
+	@Transient
+	private long tempoMedioResposta;
 	private String usuario;
 	private String senha;
 	private char status;
-	@Column(name = "PING_TIMEOUT")
-	private int pingTimeOut;
-	@Column(name = "TEMPO_MEDIO_PING")
-	private long tempoMedioPing;
 	@Column(name = "TEMPO_REFRESH")
 	private int tempoRefresh;
 	
@@ -72,22 +76,28 @@ public class Servidor {
 	public void setStatus(char status) {
 		this.status = status;
 	}
-	public int getPingTimeOut() {
-		return pingTimeOut;
-	}
-	public void setPingTimeOut(int pingTimeOut) {
-		this.pingTimeOut = pingTimeOut;
-	}
-	public long getTempoMedioPing() {
-		return tempoMedioPing;
-	}
-	public void setTempoMedioPing(long tempoMedioPing) {
-		this.tempoMedioPing = tempoMedioPing;
-	}
 	public int getTempoRefresh() {
 		return tempoRefresh;
 	}
 	public void setTempoRefresh(int tempoRefresh) {
 		this.tempoRefresh = tempoRefresh;
+	}
+	public int getPorta() {
+		return porta;
+	}
+	public void setPorta(int porta) {
+		this.porta = porta;
+	}
+	public int getTimeOut() {
+		return timeOut;
+	}
+	public void setTimeOut(int timeOut) {
+		this.timeOut = timeOut;
+	}
+	public long getTempoMedioResposta() {
+		return tempoMedioResposta;
+	}
+	public void setTempoMedioResposta(long tempoMedioResposta) {
+		this.tempoMedioResposta = tempoMedioResposta;
 	}
 }

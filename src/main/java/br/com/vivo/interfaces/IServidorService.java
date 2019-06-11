@@ -12,5 +12,4 @@ public interface IServidorService {
 	public Servidor buscarPorId(int id);
 	public Servidor buscarPorIp(String ip);
 	public ArrayList<Servidor> buscarTodos();
-	public void updateStatusServidor(Servidor servidor);
 }

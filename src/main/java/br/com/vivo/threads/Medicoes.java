@@ -1,8 +1,11 @@
 package br.com.vivo.threads;
 
 import java.io.IOException;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
+
+import br.com.vivo.model.Servidor;
 
 abstract class Medicoes {
 	
@@ -19,37 +22,37 @@ abstract class Medicoes {
 		return (total/times.size());
 	}
 	
-	protected ArrayList<Long> persistePing(InetAddress address, int timeout) {
+	protected ArrayList<Long> persisteConexao(Servidor servidor) {
 		long ini = System.currentTimeMillis();
 		
-		try {
+		
 			ArrayList<Long> times = new ArrayList<>();
 			for(int i=0; i<QTDE_PING; i++) {
 				ini=System.currentTimeMillis();
 				
-				address.isReachable(timeout);
+				getStatusServidor(servidor);
 				
 				times.add(System.currentTimeMillis() - ini);
 			}
 			
 			return times;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		
 	}
 	
-	protected char getStatusServidor(InetAddress address, int timeout) {
+	protected char getStatusServidor(Servidor servidor) {
 		
 		try {
-			return address.isReachable(timeout) ? SUCESSO : ERRO ;
+			
+			InetSocketAddress socAddress = new InetSocketAddress(servidor.getIp(), servidor.getPorta());
+			Socket socket = new Socket();
+			socket.connect(socAddress, servidor.getTimeOut());
+			
+			socket.close();
+			
+			return SUCESSO;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			return '0';
+			return ERRO;
 		}
-		
-		
-		
 	}
 }

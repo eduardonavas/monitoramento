@@ -34,7 +34,7 @@ public class MonitorController {
 		
 			MonitorBean monitor = null;
 			for(MonitorBean m : MONITORES) {
-				if(m.getMonitor().getServidor().getIp().equals(servidor.getIp())) {
+				if(m.getMonitor().getServidor().getId() == servidor.getId()) {
 					monitor = m;
 				}
 			}
@@ -60,7 +60,7 @@ public class MonitorController {
 	
 	private static boolean validaMonitorNaoExiste(Servidor servidor) {
 		for(MonitorBean monitor : MONITORES) {
-			if(servidor.getIp().equals(monitor.getThread().getName())) {
+			if(servidor.getId() == monitor.getMonitor().getServidor().getId()) {
 				return false;
 			}
 		}

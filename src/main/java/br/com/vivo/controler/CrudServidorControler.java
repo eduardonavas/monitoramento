@@ -2,8 +2,6 @@ package br.com.vivo.controler;
 
 import java.util.ArrayList;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,14 +47,6 @@ public class CrudServidorControler implements IServidorService {
 	@Override
 	public void delete(Servidor servidor) {
 		servidorRepo.delete(servidor);
-		
-	}
-
-	@Override
-	@Transactional
-	public void updateStatusServidor(Servidor servidor) {
-
-		servidorRepo.updateStatus(servidor.getId(), servidor.getStatus(), servidor.getTempoMedioPing());
 		
 	}
 
