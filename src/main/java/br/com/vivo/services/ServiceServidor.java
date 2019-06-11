@@ -24,6 +24,7 @@ import br.com.vivo.model.Servidor;
 public class ServiceServidor {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final String SERVIDOR_DEMANDAS = "10.11.191.80";
 	
 	@Autowired
 	private IServidorService iServidorService;
@@ -97,11 +98,16 @@ public class ServiceServidor {
 	@RequestMapping(value = "/buscarDemandas/{ip}", method = RequestMethod.GET  )
 	@CrossOrigin(origins = "*")
 	public ArrayList<Demanda> buscarDemanadas(@PathVariable String ip) throws ServerNotFoundException {
-	
-		Servidor servidor80 = buscarPorIp("10.129.176.28");
-		Servidor servidor = buscarPorIp(ip);
-		ColetarDemandas coletarDemandas = new ColetarDemandas();			
+		try {
+			Servidor servidor80 = buscarPorIp(SERVIDOR_DEMANDAS);
+			Servidor servidor = buscarPorIp(ip);
+			ColetarDemandas coletarDemandas = new ColetarDemandas();			
+			
+			return coletarDemandas.coletar(servidor80, servidor);
+		}catch (ServerNotFoundException e) {
+			return new ArrayList<>();
+		}
 		
-		return coletarDemandas.coletar(servidor80, servidor);
+		
 	}
 }
